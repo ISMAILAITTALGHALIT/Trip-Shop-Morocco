@@ -1,0 +1,31 @@
+.span-container{
+display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.price {
+  margin-top: 3px;
+}
+
+.iconStar{
+  color: #f4e242;
+  vertical-align: middle;
+}
+.icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  height: 50%;
+  transform: translate(-50%, -50%);
+  width: 50px;
+  height: 50px;
+  display: block;
+}
+
+.but{
+  width: 80px;
+  height: 50px;
+  margin-left: auto;
+  margin-right: auto;
+}

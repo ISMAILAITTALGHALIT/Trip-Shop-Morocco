@@ -1,0 +1,40 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title *ngIf="uid === '1000'">{{ message?.title }}</ion-title>
+    <ion-title *ngIf="uid !== '1000'">Contacter le vendeur</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="toggleAction()" *ngIf="action === 'read'" fill="outline">Répondre</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card *ngIf="uid === '1000'">
+    <ion-item>
+      <ion-avatar slot="start">
+        <!--<ion-img [src]="'http://178.128.169.188:3000/api/Containers/photos/download/'+message?.picture"></ion-img>-->
+        <ion-img [src]="message?.picture"></ion-img>
+      </ion-avatar>
+      <ion-label>{{ message?.title }}</ion-label>
+      <ion-note slot="end">{{ message?.createdAt | date }}</ion-note>
+    </ion-item>
+
+    <ion-card-content>
+      {{ message?.content }}
+    </ion-card-content>
+  </ion-card>
+</ion-content>
+
+<ion-footer *ngIf="action === 'write'">
+  <ion-toolbar color="primary">
+    <ion-input class="message-editor" [(ngModel)]="msgContent" type="text" placeholder="Tapez votre message"></ion-input>
+    <ion-buttons slot="end">
+      <ion-button *ngIf="uid === '1000'" (click)="send()" class="message-editor-button" color="light">
+        <ion-icon name="send" slot="icon-only"></ion-icon>
+      </ion-button>
+      <ion-button *ngIf="uid !== '1000'" (click)="contact()" class="message-editor-button" color="light">
+        <ion-icon name="send" slot="icon-only"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-footer>

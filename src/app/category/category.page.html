@@ -1,0 +1,48 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+    <ion-back-button defaultHref="home"></ion-back-button>
+    </ion-buttons>
+    <ion-title align="center">{{catTitle}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content
+            pullingIcon="arrow-dropdown"
+            pullingText="Pull to refresh"
+            refreshingSpinner="circles"
+            refreshingText="Chargement...">
+    </ion-refresher-content>
+  </ion-refresher>
+  <ion-list>
+    <ion-item button (click)="showDetails(article.id)" *ngFor="let article of articles">
+      <ion-thumbnail (click)="showImage(article.pictures[0],article.title, $event)" slot="start">
+        <ion-img [src]=" 'http://178.128.169.188:3000/api/Containers/photos/download/'+ article.pictures[0]"></ion-img>
+      </ion-thumbnail>
+      <div class="my-container-label">
+        <ion-label class="my-label-title">{{article.title}}</ion-label>
+        <ion-label color="medium">{{article.description.substr(0, 30)}}</ion-label>
+        <div class="span-container">
+          <span class="price" >{{article.price | currency}}</span>
+          <span *ngIf="article.averageStar >= 1 ">
+            <ion-icon class="iconStar" name="star"></ion-icon>
+          </span>
+          <span *ngIf="article.averageStar >= 2 ">
+           <ion-icon class="iconStar" name="star"></ion-icon>
+          </span>
+          <span *ngIf="article.averageStar >= 3 ">
+            <ion-icon class="iconStar" name="star"></ion-icon>
+          </span>
+          <span *ngIf="article.averageStar >= 4 ">
+            <ion-icon class="iconStar" name="star"></ion-icon>
+          </span>
+          <span *ngIf="article.averageStar >= 5 ">
+            <ion-icon class="iconStar" name="star"></ion-icon>
+          </span>
+        </div>
+      </div>
+    </ion-item>
+  </ion-list>
+</ion-content>

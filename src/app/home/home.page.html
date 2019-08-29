@@ -1,0 +1,59 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-menu-button slot="start"></ion-menu-button>
+    <ion-title align="center">
+      Bienvenue !
+    </ion-title>
+  </ion-toolbar>
+  <ion-toolbar color="primary">
+    <ion-searchbar showCancelButton animated (ionInput)="onSearch($event)" (ionCancel)="onCancel($event)"></ion-searchbar>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content
+            pullingIcon="arrow-dropdown"
+            pullingText="Pull to refresh"
+            refreshingSpinner="circles"
+            refreshingText="Chargement...">
+    </ion-refresher-content>
+  </ion-refresher>
+  <ion-virtual-scroll [items]="articles" approxItemHeight="82px">
+    <ion-item *virtualItem="let article" button (click)="showDetails(article.id)" >
+      <ion-thumbnail (click)="showImage(article.pictures[0],article.title, $event)" slot="start">
+        <ion-img [src]="'http://178.128.169.188:3000/api/Containers/photos/download/'+ article.pictures[0]"></ion-img>
+      </ion-thumbnail>
+      <div class="my-container-label">
+        <ion-label class="my-label-title">{{article.title}}</ion-label>
+        <ion-label color="medium">{{article.description.substr(0, 30)}}</ion-label>
+        <div class="span-container">
+          <span class="price" >{{article.price | currency}}</span>
+          <span *ngIf="article.averageStar >= 1 ">
+            <ion-icon class="iconStar" name="star"></ion-icon>
+          </span>
+          <span *ngIf="article.averageStar >= 2 ">
+           <ion-icon class="iconStar" name="star"></ion-icon>
+          </span>
+          <span *ngIf="article.averageStar >= 3 ">
+            <ion-icon class="iconStar" name="star"></ion-icon>
+          </span>
+          <span *ngIf="article.averageStar >= 4 ">
+            <ion-icon class="iconStar" name="star"></ion-icon>
+          </span>
+          <span *ngIf="article.averageStar >= 5 ">
+            <ion-icon class="iconStar" name="star"></ion-icon>
+          </span>
+        </div>
+      </div>
+    </ion-item>
+  </ion-virtual-scroll>
+</ion-content>
+<ion-footer>
+  <ion-toolbar color="primary">
+    <!--<ion-button (click)="goToCreate()" class="btn-cart" shape="round" size="large" expand="full">Ajouter un article</ion-button>-->
+    <ion-button (click)="goToCreate()" class="btn-cart" shape="round" size="default" expand="full" class="but" >
+      <ion-icon slot="icon-only" name="add-circle-outline" class="icon" ></ion-icon>
+    </ion-button>
+  </ion-toolbar>
+</ion-footer>

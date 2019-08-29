@@ -1,0 +1,29 @@
+.span-container{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.price {
+  margin-top: 3px;
+}
+
+.iconStar{
+  color: #f4e242;
+  vertical-align: middle;
+}
+.btn-cart{
+  text-transform: none !important;
+}
+
+.title{
+  text-align: center;
+  font-weight: 500;
+  font-size: 15px !important;
+}
+
+.rating-container{
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}

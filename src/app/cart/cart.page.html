@@ -1,0 +1,43 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Mon panier</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item *ngFor="let item of cartItems; let i = index">
+      <ion-thumbnail slot="start">
+        <ion-img [src]="'http://178.128.169.188:3000/api/Containers/photos/download/'+ item.item.pictures[0]"></ion-img>
+      </ion-thumbnail>
+      <div class="my-container-label">
+      <ion-label color="medium">{{item.item.title}}</ion-label>
+      <div class="badge-container">
+        <ion-badge color="secondary">{{ item.qty }}</ion-badge><span>&nbsp;* {{ item.amount | currency}}</span>
+      </div>
+      <ion-label color="medium" *ngIf="item.item.availability.type === 'Livraison'">
+        Livraison : {{ item.item.availability.feed | currency }}
+      </ion-label>
+      <ion-label>Total : {{((item.qty * item.item.price)+item.item.availability.feed | currency)}}</ion-label>
+      <ion-button (click)="contact(item)" class="btn-cart" size="small">
+        <ion-icon slot="start" name="mail"></ion-icon>
+        Contacter le vendeur</ion-button>
+      </div>
+      <ion-buttons (click)="remove(i, item)" slot="end">
+        <ion-button color="danger">
+          <ion-icon name="remove-circle" slot="icon-only"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+    </ion-item>
+  </ion-list>
+</ion-content>
+<ion-footer>
+  <ion-toolbar>
+    <ion-button fill="outline" expand="block">
+      Total: {{ total | currency}}
+    </ion-button>
+  </ion-toolbar>
+</ion-footer>

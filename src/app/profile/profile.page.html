@@ -1,0 +1,94 @@
+<ion-header>
+    <ion-toolbar color="primary">
+        <ion-segment [ngModel]="profileType" (ionChange)="segmentChanged($event)">
+            <ion-segment-button value="Profil" Layout="icon-start">
+                <ion-icon name="contact"></ion-icon>
+                <ion-label>Mon Profile</ion-label>
+            </ion-segment-button>
+            <ion-segment-button value="MesArticles" Layout="icon-start">
+                <ion-icon name="pricetags"></ion-icon>
+                <ion-label>Mes Articles</ion-label>
+            </ion-segment-button>
+        </ion-segment>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+        <ion-refresher-content
+                pullingIcon="arrow-dropdown"
+                pullingText="Pull to refresh"
+                refreshingSpinner="circles"
+                refreshingText="Chargement...">
+        </ion-refresher-content>
+    </ion-refresher>
+    <div [ngSwitch]="profileType">
+        <div *ngSwitchCase="'Profil'">
+            <ion-item>
+                <ion-avatar slot="start">
+                    <ion-img [src]="utilisateur?.avatar"></ion-img>
+                </ion-avatar>
+                <div class="my-container-label">
+                    <!--<ion-label>{{utilisateur?.avatar}}</ion-label>-->
+                    <ion-label class="my-label-title">{{utilisateur?.username}}</ion-label>
+                    <ion-label color="medium">{{utilisateur?.contact}}</ion-label>
+                </div>
+                <ion-buttons slot="end">
+                    <ion-button (click)="action()" color="secondary">
+                        <ion-icon slot="icon-only" name="camera"></ion-icon>
+                    </ion-button>
+                </ion-buttons>
+            </ion-item>
+            <ion-item>
+                <ion-label position="floating">Nom d'utilisateur</ion-label>
+                <ion-input type="text" [(ngModel)]="utilisateur.username"></ion-input>
+            </ion-item>
+            <ion-button (click)="updateProfile()" expand="block" class="edit-profile">
+                Mettre à jour
+            </ion-button>
+        </div>
+        <div *ngSwitchCase="'MesArticles'">
+            <ion-list *ngFor="let article of articles; let i = index">
+                <ion-item-sliding>
+                    <ion-item>
+                        <ion-thumbnail slot="start">
+                            <ion-img [src]="'http://178.128.169.188:3000/api/Containers/photos/download/'+article.pictures[0]"></ion-img>
+                        </ion-thumbnail>
+                        <ion-label>
+                            <h2>{{article.title}}</h2>
+                            <p>{{article.description}}</p>
+                            <p>{{article.price | currency}}
+                            <span *ngIf="article.averageStar >= 1 ">
+                                <ion-icon class="iconStar" name="star"></ion-icon>
+                            </span>
+                            <span *ngIf="article.averageStar >= 2 ">
+                                <ion-icon class="iconStar" name="star"></ion-icon>
+                            </span>
+                            <span *ngIf="article.averageStar >= 3 ">
+                                <ion-icon class="iconStar" name="star"></ion-icon>
+                            </span>
+                            <span *ngIf="article.averageStar >= 4 ">
+                                <ion-icon class="iconStar" name="star"></ion-icon>
+                            </span>
+                            <span *ngIf="article.averageStar >= 5 ">
+                                <ion-icon class="iconStar" name="star"></ion-icon>
+                            </span>
+                            </p>
+                        </ion-label>
+                    </ion-item>
+                    <ion-item-options side="start">
+                        <ion-item-option (click)="updateArticle(article, i)" color="success" expandable>
+                            <ion-icon name="create" slot="icon-only"></ion-icon>
+                        </ion-item-option>
+                    </ion-item-options>
+                    <ion-item-options side="end">
+                        <ion-item-option (click)="deleteArticle(article, i)" color="danger" expandable>
+                            <ion-icon name="trash" slot="icon-only"></ion-icon>
+                        </ion-item-option>
+                    </ion-item-options>
+                </ion-item-sliding>
+            </ion-list>
+        </div>
+    </div>
+</ion-content>
+

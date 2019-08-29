@@ -1,0 +1,28 @@
+<ion-content>
+  <ion-slides pager="true">
+    <ion-slide>
+      <h1>Trip Shop Morocco</h1>
+      <h2>Bienvenue</h2>
+      <div class="icon-container">
+        <ion-icon class="icon" name="cart"></ion-icon>
+      </div>
+      <p>Besoin d'acheter ou vendre un materiel de trip & randonnée, ici vous trouverez ce que vous voulez !</p>
+    </ion-slide>
+    <ion-slide>
+      <h1>Trip Shop Morocco</h1>
+      <h2>Connexion</h2>
+      <div class="icon-container">
+        <ion-icon class="icon" name="log-in"></ion-icon>
+      </div>
+      <p>Aprés l'inscription, complétez votre profil et donnez une seconde vie à votre matériel !</p>
+      <ion-button (click)="loginWithFacebook()" expand="block" >
+        <ion-icon slot="start" name="logo-facebook"></ion-icon>
+        Facebook
+      </ion-button>
+      <ion-button (click)="loginWithPhone()" expand="block" >
+        <ion-icon slot="start" name="call"></ion-icon>
+        Telephone
+      </ion-button>
+    </ion-slide>
+  </ion-slides>
+</ion-content>

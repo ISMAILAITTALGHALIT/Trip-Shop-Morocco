@@ -1,0 +1,65 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Article à modifier: {{article?.title}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item>
+      <ion-label position="floating">Nom</ion-label>
+      <ion-input type="text" [(ngModel)]="article.title"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Description</ion-label>
+      <ion-textarea [(ngModel)]="article.description"></ion-textarea>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Prix (en Dollars Américains)</ion-label>
+      <ion-input type="number" [(ngModel)]="article.price"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Catégorie du produit</ion-label>
+      <ion-select [(ngModel)]="article.category">
+        <ion-select-option [selected]="cat.title === article.category" [value]="cat.title" *ngFor="let cat of categories">{{ cat.title }}</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Ville</ion-label>
+      <ion-select [(ngModel)]="article.city">
+        <ion-select-option [selected]="city.name === article.city" [value]="city.name" *ngFor="let city of cities">{{ city.name }}</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item-divider color="primary">
+      <ion-icon name="build"></ion-icon>
+      Etat du produit
+    </ion-item-divider>
+    <ion-item>
+      <ion-label position="floating">Etat</ion-label>
+      <ion-select [(ngModel)]="article.state">
+        <ion-select-option value="Neuf">Neuf</ion-select-option>
+        <ion-select-option value="Déjà utilisé">Déjà utilisé</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Mode d'acquisition</ion-label>
+      <ion-select [(ngModel)]="article.availability.type">
+        <ion-select-option value="Livraison">Livraison</ion-select-option>
+        <ion-select-option value="En Magasin">Disponible en Magasin</ion-select-option>
+        <ion-select-option value="Main en Main">Main en Main</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item *ngIf="article?.availability?.type === 'Livraison'">
+      <ion-label position="floating">Frais de livraison (en Dollars Américains)</ion-label>
+      <ion-input type="number" [(ngModel)]="article.availability.feed"></ion-input>
+    </ion-item>
+    <ion-item *ngIf="article?.availability?.type === 'En Magasin'">
+      <ion-label position="floating">Adresse Magasin</ion-label>
+      <ion-textarea placeholder="Entrez l'adresse complète du magasin" [(ngModel)]="article.availability.address"></ion-textarea>
+    </ion-item>
+    <ion-button expand="block" (click)="updateArticle()" class="btn-edit">
+      <ion-icon slot="start" name="md-checkmark"></ion-icon>&nbsp;
+      valider
+    </ion-button>
+  </ion-list>
+</ion-content>
