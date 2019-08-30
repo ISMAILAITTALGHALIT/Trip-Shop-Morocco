@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar color="primary">
     <ion-title *ngIf="uid === '1000'">{{ message?.title }}</ion-title>
-    <ion-title *ngIf="uid !== '1000'">Contacter le vendeur</ion-title>
+    <ion-title *ngIf="uid !== '1000'" align="center">Contacter le vendeur</ion-title>
     <ion-buttons slot="end">
       <ion-button (click)="toggleAction()" *ngIf="action === 'read'" fill="outline">Répondre</ion-button>
     </ion-buttons>
@@ -24,6 +24,12 @@
     </ion-card-content>
   </ion-card>
 </ion-content>
+
+<ion-card *ngIf="action === 'write'">
+  <ion-card-content align="center"><strong>SVP Compléter votre profile avant de contacter le vendeur</strong></ion-card-content>
+</ion-card>
+
+
 
 <ion-footer *ngIf="action === 'write'">
   <ion-toolbar color="primary">

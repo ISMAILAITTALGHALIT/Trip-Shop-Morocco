@@ -64,10 +64,14 @@ export class ProductDetailPage implements OnInit {
   }
 
   showImage(imgId: string, imgTitle: string) {
-    event.stopPropagation();
-    this.photoViewer.show(`http://192.168.1.106:3000/api/Containers/photos/download/${imgId}`,
-        imgTitle,
-        {share: true});
+    try {
+      event.stopPropagation();
+      this.photoViewer.show(`http://178.128.169.188:3000/api/Containers/photos/download/${imgId}`,
+          imgTitle,
+          {share: true});
+    } catch (e) {
+      console.log('probleme de photoViewer', e);
+    }
   }
 
   leaveNote(): void {

@@ -170,17 +170,22 @@ export class CreateProductPage implements OnInit {
    const options: ImagePickerOptions = {
      maximumImagesCount: imageNum,
      outputType: 0,
-     quality: 100
+     quality: 70, // normalement 100
+       height: 200,
+       width: 200
    };
    return this.imagePicker.getPictures(options);
   }
   async getCam() {
     const options: CameraOptions = {
       sourceType: 1,
-      quality: 100,
+      quality: 70, // normalement 100
+      targetWidth: 600,
+      targetHeight: 600,
       destinationType: this.camera.DestinationType.FILE_URI,
       encodingType: this.camera.EncodingType.JPEG,
-      mediaType: this.camera.MediaType.PICTURE
+      mediaType: this.camera.MediaType.PICTURE,
+      allowEdit: true
     };
     return this.camera.getPicture(options);
   }
